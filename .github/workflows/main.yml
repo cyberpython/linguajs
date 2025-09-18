@@ -23,6 +23,9 @@ jobs:
       - name: Build glossa-interpreter-js with Gradle
         working-directory: glossa-interpreter-js
         run: ./gradlew clean generateJavaScript
+        env:
+          USERNAME: ${{ github.actor }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # ---------- Prepare the React app ----------
       - name: Copy generated JS library

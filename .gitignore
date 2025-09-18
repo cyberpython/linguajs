@@ -30,3 +30,5 @@ glossa-interpreter-js/.vscode
 glossa-interpreter-js/bin
 glossa-interpreter-js/build
 glossa-interpreter-js/gradle.properties
+
+.vscode
