@@ -36,20 +36,6 @@ repositories {
             password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
         }
     }
-    maven {
-        name = "Forgejo"
-        allowInsecureProtocol = true
-        url = uri("${project.findProperty("forgejo.base_url")}/api/packages/${project.findProperty("forgejo.user")}/maven")
-
-        credentials(HttpHeaderCredentials) {
-            name = "Authorization"
-            value = "token ${project.findProperty('forgejo.token')}"
-        }
-
-        authentication {
-            header(HttpHeaderAuthentication)
-        }
-    }
 }
 
 dependencies {
