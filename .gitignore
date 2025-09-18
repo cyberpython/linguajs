@@ -1,0 +1,32 @@
+# Logs
+linguajs/logs
+linguajs/*.log
+linguajs/npm-debug.log*
+linguajs/yarn-debug.log*
+linguajs/yarn-error.log*
+linguajs/pnpm-debug.log*
+linguajs/lerna-debug.log*
+
+linguajs/node_modules
+linguajs/dist
+linguajs/dist-ssr
+linguajs/*.local
+
+linguajs/src/interpreter/*.js
+
+# Editor directories and files
+linguajs/.vscode/*
+linguajs/!.vscode/extensions.json
+linguajs/.idea
+linguajs/.DS_Store
+linguajs/*.suo
+linguajs/*.ntvs*
+linguajs/*.njsproj
+linguajs/*.sln
+linguajs/*.sw?
+
+glossa-interpreter-js/.gradle
+glossa-interpreter-js/.vscode
+glossa-interpreter-js/bin
+glossa-interpreter-js/build
+glossa-interpreter-js/gradle.properties
