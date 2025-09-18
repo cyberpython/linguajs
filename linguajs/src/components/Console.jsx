@@ -204,15 +204,15 @@ function Console( { consolePanelHeight, setConsolePanelHeight } ) {
                 onClick={handleCut}
                 disabled={!hasSelection()}
               >
-                Cut
+                Αποκοπή
               </MenuItem>
               <MenuItem
                 onClick={handleCopy}
                 disabled={!hasSelection()}
               >
-                Copy
+                Αντιγραφή
               </MenuItem>
-              <MenuItem onClick={handleClear}>Clear</MenuItem>
+              <MenuItem onClick={handleClear}>Καθαρισμός</MenuItem>
             </Menu>
           </Box>
           <Box paddingY={'8px'} 
