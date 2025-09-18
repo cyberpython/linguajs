@@ -1,0 +1,56 @@
+name: Build & Deploy
+
+on:
+  push:
+    branches: [ main ]   # or master if that's your default
+  workflow_dispatch:     # allow manual runs
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ---------- Build the Java project ----------
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Build glossa-interpreter-js with Gradle
+        working-directory: glossa-interpreter-js
+        run: ./gradlew clean generateJavaScript
+
+      # ---------- Prepare the React app ----------
+      - name: Copy generated JS library
+        run: |
+          cp -f glossa-interpreter-js/src/main/js/outputHandler.js linguajs/src/interpreter/outputHandler.js
+          cp -f glossa-interpreter-js/build/generated/teavm/js/glossa-interpreter.js linguajs/src/interpreter/glossa-interpreter.js
+
+      # ---------- Build the Vite project ----------
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: linguajs/package-lock.json
+
+      - name: Install dependencies
+        working-directory: linguajs
+        run: npm ci
+
+      - name: Build Vite app
+        working-directory: linguajs
+        run: npm run build
+
+      # ---------- Deploy to GitHub Pages ----------
+      - name: Deploy 🚀
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: linguajs/dist
+          publish_branch: gh-pages
+          force_orphan: true
